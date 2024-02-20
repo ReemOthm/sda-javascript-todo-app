@@ -100,9 +100,17 @@ textarea{
 }
 
 .task{
-    padding: .4em 1em;
+    padding: .4em 1em .4em 3em;
     background-color: white;
     border-radius: 10px;
+    position: relative;
+    margin-bottom: .5rem;
+}
+
+input[type='checkbox']{
+    top: 15px;
+    position: absolute;
+    left: 16px;
 }
 
 .task-header{
@@ -112,16 +120,26 @@ textarea{
 }
 
 .task__title{
-
+    text-transform: capitalize;
 }
 
-.task-icons{
-}
-
-.task-icons i {
+span.edit::before,
+span.del::before{
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
     font-size: 1.1rem;
     margin-left: 1rem;
     cursor: pointer;
+}
+
+span.edit::before{
+    content: "\f044";
+    color: #585656;
+}
+
+span.del::before{
+    content: "\f1f8";
+    color: #d71414;
 }
 
 .task__description{
