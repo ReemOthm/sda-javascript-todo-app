@@ -8,15 +8,25 @@
     <title>Todo JavaScript App</title>
   </head>
   <body>
-    <main>
-      <h1>My List</h1>
-      <div class="container">
-        <div class="form">
-          <input type="text" class="input" placeholder="Type a task" />
-          <input type="submit" class="add" value="Add Task" />
+    <section>
+        <div id="search-todos">
+            <h2>Search Todo</h2>
+            <form class="form main--bg">
+                <input type="text" class="inputs" placeholder="type a todo title" />
+                <input type="submit" class="button" value="Search" />
+            </form>
         </div>
-        <div class="tasks"></div>
-      </div>
+        <div id="add-todos">
+            <h2>TO-DO</h2>
+            <form class="form main--bg">
+                <input type="text" class="inputs" placeholder="Todo Title" />
+                <textarea name="description" class="add__description inputs" placeholder="Todo description"></textarea>
+                <input type="submit" class="button" value="Add Task" />
+            </form>
+        </div>
+      </section>
+    <main>
+        <section class="tasks"></section>
     </main>
     <script src="index.js"></script>
   </body>
