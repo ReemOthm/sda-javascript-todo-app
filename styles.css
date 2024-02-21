@@ -4,6 +4,22 @@
     margin: 0;
 }
 
+::-webkit-scrollbar{
+    width: 15px;
+}
+
+::-webkit-scrollbar-track{
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #b7a7b9
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background-color: #817583
+}
+
 body{
     margin: 0;
     padding: 2em;
