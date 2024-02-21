@@ -96,6 +96,13 @@ function createTodos(todos){
         task.appendChild(taskHeader);
         task.appendChild(description);
 
+        const date = new Date();
+        const spanDate = document.createElement('span');
+        spanDate.textContent = `${date.getDate()}/${date.getMonth()+1} - ${date.getHours()}:${date.getMinutes()}`;
+        spanDate.classList.add('date');
+
+        task.appendChild(spanDate);
+
         list.appendChild(task);
     }
     );

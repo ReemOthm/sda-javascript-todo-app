@@ -157,7 +157,7 @@ span.del::before{
 }
 
 .task__description{
-    padding: .2em 0 0 1em;
+    padding: .2em 0 1em 1em;
 }
 
 .no{
@@ -170,11 +170,22 @@ span.del::before{
 }
 
 .clear{
+    width: 100px;
     background-color: #be2929;
     color: white;
-    width: 100px;
+    position: absolute;
+    bottom: 15px;
+    left: 40%;
 }
 
 .clear:hover{
     background-color: #d71414;
+}
+
+.date{
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+    color: #777;
+    font-size: 0.8em;
 }
