@@ -1,5 +1,4 @@
 let todos = [];
-let id = 1;
 
 const tasks = document.querySelector('.tasks');
 const addButton = document.getElementById('add-btn');
@@ -12,7 +11,6 @@ const loadStorageTodos = () => {
     try {
         const storageTodos = JSON.parse(window.localStorage.getItem('todos'));
         if (storageTodos){
-    
             todos = storageTodos;
             console.log(todos);
             createTodos(todos);
@@ -35,15 +33,16 @@ window.addEventListener('DOMContentLoaded', loadStorageTodos);
 addButton.addEventListener('click', ()=> {
 
     if ( todoTitle.value !== '' && todoDescription.value !== ''){
+
         todos.push(
             {
-                id: id++, 
+                id: todos.length, 
                 title: todoTitle.value.trim(),
                 description: todoDescription.value.trim(),
                 completed: false,
             }
         );
-
+        
         console.log(todos);
         window.localStorage.setItem('todos',JSON.stringify(todos));
 
@@ -78,6 +77,10 @@ function createTodos(todos){
         
         const del =document.createElement('span');
         del.classList.add('del');
+
+        del.addEventListener('click', ()=>{
+            deleteTodo(todo.id);
+        });
         
         icons.appendChild(edit);
         icons.appendChild(del);
@@ -112,6 +115,16 @@ function clearHandler(){
     tasks.appendChild(clearBtn);
 }
 
-
+// ---------Delete Todo------------
+const deleteTodo = (id)=> {
+    todos = todos.filter(todo => todo.id !== id);
+    list.innerHTML = '';
+    createTodos(todos);
+    localStorage.setItem('todos', JSON.stringify(todos));
+    if(todos.length == 0){
+        localStorage.clear();
+        location.reload();
+    }
+}
 
 
