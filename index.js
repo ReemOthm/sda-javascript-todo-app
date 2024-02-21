@@ -7,25 +7,32 @@ const todoTitle = document.getElementById("add-input");
 const todoDescription = document.getElementById('add-description');
 
 // ----------Checking the local storage-----------
-if (window.localStorage.todos){
-    JSON.parse(window.localStorage.getItem('todos')).forEach(element => { //assign the array again
-        todos.push(element);
-    });
+const loadStorageTodos = () => {
+    try {
+        const storageTodos = JSON.parse(window.localStorage.getItem('todos'));
+        if (storageTodos){
+    
+            todos = storageTodos;
+            console.log(todos);
+            createTodos(todos);
+        }
+        else{
+            const tasks = document.querySelector('.tasks');
+            const noTodos = document.createElement('p');
+            noTodos.textContent = "No Todos added";
+            noTodos.classList.add('no');
+            tasks.appendChild(noTodos);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-    console.log(todos);
-    createTodos();
-}
-else{
-    const tasks = document.querySelector('.tasks');
-    const noTodos = document.createElement('p');
-    noTodos.textContent = "No Todos added";
-    noTodos.classList.add('no');
-    tasks.appendChild(noTodos);
-}
+window.addEventListener('DOMContentLoaded', loadStorageTodos);
 
 // -------Handler Add Button-------------
-addButton.addEventListener('click', (e)=> {
-    e.preventDefault();
+addButton.addEventListener('click', ()=> {
+
     if ( todoTitle.value !== '' && todoDescription.value !== ''){
         todos.push(
             {
@@ -38,17 +45,16 @@ addButton.addEventListener('click', (e)=> {
 
         console.log(todos);
         window.localStorage.setItem('todos',JSON.stringify(todos));
-        createTodos();
-        location.reload();
+
         todoTitle.value = '';
         todoDescription.value = '';
     }
 });
 
 
-// -----------Render Todos-----------                                        ////need to fix
-function createTodos(){
-    JSON.parse(localStorage.getItem('todos')).forEach((todo)=>{
+// -----------Render Todos-----------                                        
+function createTodos(todos){
+    todos.forEach((todo)=>{
         //tha main div
         const task = document.createElement('div');
         task.classList.add('task');
