@@ -1,6 +1,7 @@
 let todos = [];
 let id = 1;
 
+const tasks = document.querySelector('.tasks');
 const addButton = document.getElementById('add-btn');
 const list = document.getElementById('list');
 const todoTitle = document.getElementById("add-input");
@@ -15,9 +16,9 @@ const loadStorageTodos = () => {
             todos = storageTodos;
             console.log(todos);
             createTodos(todos);
+            clearHandler();
         }
         else{
-            const tasks = document.querySelector('.tasks');
             const noTodos = document.createElement('p');
             noTodos.textContent = "No Todos added";
             noTodos.classList.add('no');
@@ -51,7 +52,7 @@ addButton.addEventListener('click', ()=> {
     }
 });
 
-
+// Functions
 // -----------Render Todos-----------                                        
 function createTodos(todos){
     todos.forEach((todo)=>{
@@ -97,6 +98,19 @@ function createTodos(todos){
     );
 }
 
+// ----------Clear Todos----------
+function clearHandler(){
+    const clearBtn = document.createElement('button');
+    clearBtn.textContent = 'Clear';
+    clearBtn.classList.add('button', 'clear');
+
+    clearBtn.addEventListener('click', ()=> {
+        localStorage.clear();
+        location.reload();
+    });
+
+    tasks.appendChild(clearBtn);
+}
 
 
 

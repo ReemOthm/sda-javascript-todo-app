@@ -168,3 +168,13 @@ span.del::before{
     left: 50%;
     transform: translate(-50%,-50%);
 }
+
+.clear{
+    background-color: #be2929;
+    color: white;
+    width: 100px;
+}
+
+.clear:hover{
+    background-color: #d71414;
+}
