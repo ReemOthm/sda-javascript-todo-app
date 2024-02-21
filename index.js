@@ -15,6 +15,13 @@ if (window.localStorage.todos){
     console.log(todos);
     createTodos();
 }
+else{
+    const tasks = document.querySelector('.tasks');
+    const noTodos = document.createElement('p');
+    noTodos.textContent = "No Todos added";
+    noTodos.classList.add('no');
+    tasks.appendChild(noTodos);
+}
 
 // -------Handler Add Button-------------
 addButton.addEventListener('click', (e)=> {
