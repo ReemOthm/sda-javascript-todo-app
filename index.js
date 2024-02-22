@@ -65,6 +65,16 @@ function createTodos(todos){
         const checkbox = document.createElement('input');
         checkbox.type = "checkbox";
 
+        checkbox.addEventListener('change', ()=> {
+            if(checkbox.checked){
+                title.style.textDecoration = 'line-through';
+                description.style.textDecoration = 'line-through';
+            }else{
+                title.style.textDecoration = 'none';
+                description.style.textDecoration = 'none';
+            } 
+        });
+
         const title = document.createElement('h3');
         title.classList.add('task__title');
         title.textContent = todo.title;
