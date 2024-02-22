@@ -190,3 +190,38 @@ span.del::before{
     color: #777;
     font-size: 0.8em;
 }
+
+#edit-todos{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(0 0 0 / 68%);
+    z-index: 100;
+    display: grid;
+    place-items: center;
+}
+
+#edit-todos h2{
+    margin-bottom: 1rem;
+}
+
+.edit-buttons{
+    display: flex;
+    gap: 30px;
+}
+
+#edit-btn{
+    flex: 1;
+}
+
+#close-btn{
+    background-color: #555;
+    color: #fff;
+    flex: 1;
+}
+
+#close-btn:hover{
+    background-color: #222;
+}
