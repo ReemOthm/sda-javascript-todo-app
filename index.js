@@ -33,8 +33,7 @@ const loadStorageTodos = () => {
 }
 
 // -------Add Button Handler-------------
-addButton.addEventListener('click', ()=> {
-    
+addButton.addEventListener('click', (e)=> {
     if ( todoTitle.value !== ''){
 
         const date = new Date();
@@ -54,6 +53,9 @@ addButton.addEventListener('click', ()=> {
 
         todoTitle.value = '';
         todoDescription.value = '';
+    } else{
+        e.preventDefault();
+        document.querySelector('p.inputError').textContent = 'enter a todo title';
     }
 });
 
