@@ -32,12 +32,15 @@ addButton.addEventListener('click', ()=> {
 
     if ( todoTitle.value !== '' && todoDescription.value !== ''){
 
+        const date = new Date();
+
         todos.push(
             {
                 id: todos.length, 
                 title: todoTitle.value.trim(),
                 description: todoDescription.value.trim(),
                 completed: false,
+                date: `${date.getDate()}/${date.getMonth()+1} - ${date.getHours()}:${date.getMinutes()}`
             }
         );
         
@@ -108,9 +111,8 @@ function createTodos(todos){
         task.appendChild(taskHeader);
         task.appendChild(description);
 
-        const date = new Date();
         const spanDate = document.createElement('span');
-        spanDate.textContent = `${date.getDate()}/${date.getMonth()+1} - ${date.getHours()}:${date.getMinutes()}`;
+        spanDate.textContent = todo.date;
         spanDate.classList.add('date');
 
         task.appendChild(spanDate);
@@ -156,11 +158,19 @@ const editHandler = (todo, index)=>{
     
     const editDescription = document.getElementById('edit-description');
     editDescription.value = todo.description;
+
+    const editedDate = new Date();
     
     const editBtn = document.getElementById('edit-btn');
     editBtn.onclick = (e)=>{
         e.preventDefault();
-        todos.splice(index,1, {id: todo.id, title: editTitle.value, description: editDescription.value});
+        todos.splice(index,1, {
+            id: todo.id,
+            title: editTitle.value, 
+            description: editDescription.value, 
+            completed: false,
+            date: `${editedDate.getDate()}/${editedDate.getMonth()+1} - ${editedDate.getHours()}:${editedDate.getMinutes()}`
+        });
         console.log(todos);
         createTodos(todos);
         localStorage.setItem('todos', JSON.stringify(todos));
