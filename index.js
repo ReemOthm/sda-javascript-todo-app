@@ -6,6 +6,9 @@ const list = document.getElementById('list');
 const todoTitle = document.getElementById("add-input");
 const todoDescription = document.getElementById('add-description');
 
+const searchInput = document.querySelector('#search-todos .inputs');
+const searchButton = document.querySelector('#search-todos .button');
+
 // ----------Checking the local storage-----------
 const loadStorageTodos = () => {
     try {
@@ -29,10 +32,10 @@ const loadStorageTodos = () => {
     }
 }
 
-// -------Handler Add Button-------------
+// -------Add Button Handler-------------
 addButton.addEventListener('click', ()=> {
-
-    if ( todoTitle.value !== '' && todoDescription.value !== ''){
+    
+    if ( todoTitle.value !== ''){
 
         const date = new Date();
 
@@ -54,9 +57,45 @@ addButton.addEventListener('click', ()=> {
     }
 });
 
+// -------Search Button Handler-------------
+searchButton.addEventListener('click', (e)=>{
+    e.preventDefault();
+    if(searchInput.value !== ''){
+        const searchTodo = todos.filter((todo) => {
+            return todo.title == searchInput.value.toLowerCase();
+        });
+
+        list.innerHTML = '';
+        document.querySelector('.details').style.display = 'none';
+
+        if(searchTodo.length > 0 ){
+            createTodos(searchTodo, displayNone = true);
+        }else{
+            const notFound = document.createElement('p');
+            notFound.textContent = 'No Todos Match';
+            notFound.classList.add('no-todos');
+            list.appendChild(notFound);
+        }
+        
+        const closeSearch = document.createElement('button');
+        closeSearch.textContent = 'Close Search';
+        closeSearch.classList.add('button');
+        
+        tasks.appendChild(closeSearch);
+        
+        closeSearch.addEventListener('click', ()=>{
+            searchInput.value = '';
+            list.innerHTML = '';
+            document.querySelector('.details').style.display = 'block';
+            createTodos(todos);
+            tasks.removeChild(closeSearch);
+        });
+    }
+});
+
 // Functions
 // -----------Render Todos-----------                                        
-function createTodos(todos){
+function createTodos(todos, displayNone = false){
     todos.forEach((todo,index)=>{
         //tha main div
         const task = document.createElement('div');
@@ -94,6 +133,11 @@ function createTodos(todos){
         del.addEventListener('click', ()=>{
             deleteTodo(todo.id);
         });
+
+        if(displayNone == true){
+            edit.style.display = 'none';
+            del.style.display = 'none';
+        }
         
         icons.appendChild(edit);
         icons.appendChild(del);
@@ -130,8 +174,6 @@ function clearHandler(){
         localStorage.clear();
         location.reload();
     });
-
-    tasks.appendChild(clearBtn);
 }
 
 // ---------Delete Todo------------
@@ -202,10 +244,9 @@ function checkedTodo(checkbox, index, title, description){
 
 // -----------Counter Todos-----------
 function counterTodos(){
-    const todosCounter = document.createElement('p');
+    const todosCounter = document.getElementById('todos-counter');
     todosCounter.textContent = `number of Todos (${todos.length})`;
     todosCounter.classList.add('counter');
-    tasks.appendChild(todosCounter);
 }
 
 //----------Completed Todos------------
