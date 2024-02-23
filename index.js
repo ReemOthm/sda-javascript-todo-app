@@ -27,8 +27,6 @@ const loadStorageTodos = () => {
     }
 }
 
-window.addEventListener('DOMContentLoaded', loadStorageTodos);
-
 // -------Handler Add Button-------------
 addButton.addEventListener('click', ()=> {
 
@@ -54,7 +52,7 @@ addButton.addEventListener('click', ()=> {
 // Functions
 // -----------Render Todos-----------                                        
 function createTodos(todos){
-    todos.forEach((todo)=>{
+    todos.forEach((todo,index)=>{
         //tha main div
         const task = document.createElement('div');
         task.classList.add('task');
@@ -84,6 +82,10 @@ function createTodos(todos){
         
         const edit =document.createElement('span');
         edit.classList.add('edit');
+
+        edit.addEventListener('click', ()=>{
+            editHandler(todo,index);
+        })
         
         const del =document.createElement('span');
         del.classList.add('del');
@@ -144,4 +146,33 @@ const deleteTodo = (id)=> {
     }
 }
 
+// --------Edit Todo----------------
+const editHandler = (todo, index)=>{
+    const editTodos = document.getElementById('edit-todos');
+    editTodos.style.display = "grid";
+    
+    const editTitle = document.getElementById('edit-title');
+    editTitle.value = todo.title;
+    
+    const editDescription = document.getElementById('edit-description');
+    editDescription.value = todo.description;
+    
+    const editBtn = document.getElementById('edit-btn');
+    editBtn.onclick = (e)=>{
+        e.preventDefault();
+        todos.splice(index,1, {id: todo.id, title: editTitle.value, description: editDescription.value});
+        console.log(todos);
+        createTodos(todos);
+        localStorage.setItem('todos', JSON.stringify(todos));
+        editTodos.style.display = "none";        
+        location.reload();
+    };
+    
+    const closeBtn = document.getElementById('close-btn');
+    closeBtn.onclick = (e)=>{
+        e.preventDefault();
+        editTodos.style.display = "none";        
+    };
+}
 
+window.addEventListener('DOMContentLoaded', loadStorageTodos);
