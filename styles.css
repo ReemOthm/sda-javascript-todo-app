@@ -202,6 +202,10 @@ span.del::before{
     margin-bottom: 1rem;
 }
 
+#edit-todos form{
+    width: 350px;
+}
+
 .edit-buttons{
     display: flex;
     gap: 30px;
@@ -229,7 +233,9 @@ span.del::before{
 .no-todos{
     text-align: center;
     color: #343434;
-    padding: 1em;
+    padding: 0 1em;
+    margin-bottom: 1em;
+    background-color: #eee;
 }
 
 @media screen and (max-width: 991px) {
