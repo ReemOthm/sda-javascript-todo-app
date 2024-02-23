@@ -62,7 +62,7 @@ searchButton.addEventListener('click', (e)=>{
     e.preventDefault();
     if(searchInput.value !== ''){
         const searchTodo = todos.filter((todo) => {
-            return todo.title.split(' ').includes(searchInput.value.toLowerCase().trim()) ;
+            return todo.title.includes(searchInput.value.toLowerCase().trim());
         });
 
         list.innerHTML = '';
