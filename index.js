@@ -14,6 +14,8 @@ const loadStorageTodos = () => {
             todos = storageTodos;
             console.log(todos);
             createTodos(todos);
+            counterTodos();
+            completedTodos();
             clearHandler();
         }
         else{
@@ -65,16 +67,12 @@ function createTodos(todos){
 
         const checkbox = document.createElement('input');
         checkbox.type = "checkbox";
+        checkbox.checked = todo.completed;
 
-        checkbox.addEventListener('change', ()=> {
-            if(checkbox.checked){
-                title.style.textDecoration = 'line-through';
-                description.style.textDecoration = 'line-through';
-            }else{
-                title.style.textDecoration = 'none';
-                description.style.textDecoration = 'none';
-            } 
-        });
+        checkbox.addEventListener('change', ()=>{
+            checkedTodo(checkbox, index, title, description);
+            completedTodos();
+        })
 
         const title = document.createElement('h3');
         title.classList.add('task__title');
@@ -115,6 +113,8 @@ function createTodos(todos){
         spanDate.textContent = todo.date;
         spanDate.classList.add('date');
 
+        checkedTodo(checkbox, index, title, description);
+
         task.appendChild(spanDate);
 
         list.appendChild(task);
@@ -124,10 +124,8 @@ function createTodos(todos){
 
 // ----------Clear Todos----------
 function clearHandler(){
-    const clearBtn = document.createElement('button');
-    clearBtn.textContent = 'Clear';
-    clearBtn.classList.add('button', 'clear');
-
+    const clearBtn = document.querySelector('button.clear');
+    clearBtn.style.display = 'block'
     clearBtn.addEventListener('click', ()=> {
         localStorage.clear();
         location.reload();
@@ -183,6 +181,46 @@ const editHandler = (todo, index)=>{
         e.preventDefault();
         editTodos.style.display = "none";        
     };
+}
+
+//-----------Checked Todos------------
+function checkedTodo(checkbox, index, title, description){
+    if(checkbox.checked){
+        title.style.textDecoration = 'line-through';
+        description.style.textDecoration = 'line-through';
+        todos[index].completed = true;
+        localStorage.setItem('todos', JSON.stringify(todos));
+        console.log(todos);
+    } else{
+        title.style.textDecoration = 'none';
+        description.style.textDecoration = 'none';
+        todos[index].completed = false;
+        localStorage.setItem('todos', JSON.stringify(todos));
+        console.log(todos);
+    }
+}
+
+// -----------Counter Todos-----------
+function counterTodos(){
+    const todosCounter = document.createElement('p');
+    todosCounter.textContent = `number of Todos (${todos.length})`;
+    todosCounter.classList.add('counter');
+    tasks.appendChild(todosCounter);
+}
+
+//----------Completed Todos------------
+function completedTodos(){
+    let completedTodosNumber = 0;
+    todos.forEach((todo)=>{
+        if(todo.completed === true ){
+            completedTodosNumber += 1;
+        }
+    }); 
+    localStorage.setItem('completedTodo', completedTodosNumber); 
+
+    const completed = document.getElementById('completed');
+    completed.classList.add('counter');
+    completed.textContent = `Completed (${localStorage.getItem('completedTodo')})`;
 }
 
 window.addEventListener('DOMContentLoaded', loadStorageTodos);

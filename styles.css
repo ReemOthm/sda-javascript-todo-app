@@ -21,7 +21,6 @@
 }
 
 body{
-    height: 100vh;
     margin: 0;
     padding: 2em;
     display: flex;
@@ -174,9 +173,8 @@ span.del::before{
     width: 100px;
     background-color: #be2929;
     color: white;
-    position: absolute;
-    bottom: 15px;
-    left: 40%;
+    margin-top: 1rem;
+    display: none;
 }
 
 .clear:hover{
@@ -224,4 +222,9 @@ span.del::before{
 
 #close-btn:hover{
     background-color: #222;
+}
+
+.counter{
+    text-align: center;
+    color: #343434;
 }
