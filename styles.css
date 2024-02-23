@@ -72,7 +72,6 @@ textarea{
     background-color: white;
     outline: none;
     font-family: unset;
-    color: #6d0f7a;
     font-weight: 700;
 }
 
@@ -103,7 +102,6 @@ textarea{
     min-height: 400px;
     padding: 1em 2em; 
     border-radius: 6px; 
-    color: #6d0f7a;
     background-color: initial;
     box-shadow: none;
     position: relative;
@@ -112,7 +110,7 @@ textarea{
 
 .task{
     padding: .4em 1em .4em 3em;
-    background-color: #eee;
+    background-color: #eeeeeead;
     border-radius: 10px;
     position: relative;
     margin-bottom: .5rem;
@@ -184,7 +182,7 @@ span.del::before{
     position: absolute;
     bottom: 0;
     right: 15px;
-    color: #777;
+    color: #2a2929;
     font-size: 0.8em;
 }
 
