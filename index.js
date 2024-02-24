@@ -5,6 +5,7 @@ const addButton = document.getElementById('add-btn');
 const list = document.getElementById('list');
 const todoTitle = document.getElementById("add-input");
 const todoDescription = document.getElementById('add-description');
+const noAdded = document.querySelector('p.no-added');
 
 const searchInput = document.querySelector('#search-todos .inputs');
 const searchButton = document.querySelector('#search-todos .button');
@@ -19,12 +20,7 @@ const loadStorageTodos = () => {
             counterTodos();
             completedTodos();
             clearHandler();
-        }
-        else{
-            const noTodos = document.createElement('p');
-            noTodos.textContent = "No Todos added";
-            noTodos.classList.add('no-added');
-            tasks.appendChild(noTodos);
+            noAdded.style.display = 'none';
         }
     } catch (error) {
         console.log(error);
@@ -47,10 +43,6 @@ addButton.addEventListener('click', (e)=> {
                 date: `${date.getDate()}/${date.getMonth()+1} - ${date.getHours()}:${date.getMinutes()}`
             }
         );
-
-        if(tasks.childNodes[5].textContent == 'No Todos added'){
-            tasks.childNodes[5].style.display = 'none';
-        }
         
         window.localStorage.setItem('todos',JSON.stringify(todos));
 

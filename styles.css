@@ -152,6 +152,10 @@ span.del::before{
     color: #d71414;
 }
 
+.task__description{
+    padding: .0 1em 1em 0;
+}
+
 .no-added{
     color: #444;
     text-align: center;
