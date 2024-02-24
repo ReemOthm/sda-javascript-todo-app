@@ -155,7 +155,7 @@ span.del::before{
     padding: .2em 0 1em 1em;
 }
 
-.no{
+.no-added{
     color: #444;
     text-align: center;
     position: absolute;

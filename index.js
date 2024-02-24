@@ -23,7 +23,7 @@ const loadStorageTodos = () => {
         else{
             const noTodos = document.createElement('p');
             noTodos.textContent = "No Todos added";
-            noTodos.classList.add('no');
+            noTodos.classList.add('no-added');
             tasks.appendChild(noTodos);
         }
     } catch (error) {
@@ -47,16 +47,20 @@ addButton.addEventListener('click', (e)=> {
                 date: `${date.getDate()}/${date.getMonth()+1} - ${date.getHours()}:${date.getMinutes()}`
             }
         );
+
+        if(tasks.childNodes[5].textContent == 'No Todos added'){
+            tasks.childNodes[5].style.display = 'none';
+        }
         
-        tasks.childNodes[5].remove();
         window.localStorage.setItem('todos',JSON.stringify(todos));
-        loadStorageTodos();
 
         todoTitle.value = '';
         todoDescription.value = '';
     } else{
         document.querySelector('p.inputError').textContent = 'enter a todo title';
     }
+
+    loadStorageTodos();
 });
 
 // -------Search Button Handler-------------
