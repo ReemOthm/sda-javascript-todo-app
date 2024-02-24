@@ -15,7 +15,6 @@ const loadStorageTodos = () => {
         const storageTodos = JSON.parse(window.localStorage.getItem('todos'));
         if (storageTodos){
             todos = storageTodos;
-            console.log(todos);
             createTodos(todos);
             counterTodos();
             completedTodos();
@@ -34,8 +33,9 @@ const loadStorageTodos = () => {
 
 // -------Add Button Handler-------------
 addButton.addEventListener('click', (e)=> {
-    if ( todoTitle.value !== ''){
-
+    e.preventDefault();
+    list.innerHTML = '';
+    if ( todoTitle.value !== '' ){
         const date = new Date();
 
         todos.push(
@@ -48,13 +48,13 @@ addButton.addEventListener('click', (e)=> {
             }
         );
         
-        console.log(todos);
+        tasks.childNodes[5].remove();
         window.localStorage.setItem('todos',JSON.stringify(todos));
+        loadStorageTodos();
 
         todoTitle.value = '';
         todoDescription.value = '';
     } else{
-        e.preventDefault();
         document.querySelector('p.inputError').textContent = 'enter a todo title';
     }
 });
@@ -214,10 +214,10 @@ const editHandler = (todo, index)=>{
             date: `${editedDate.getDate()}/${editedDate.getMonth()+1} - ${editedDate.getHours()}:${editedDate.getMinutes()}`
         });
         console.log(todos);
+        list.innerHTML = '';
         createTodos(todos);
         localStorage.setItem('todos', JSON.stringify(todos));
         editTodos.style.display = "none";        
-        location.reload();
     };
     
     const closeBtn = document.getElementById('close-btn');
