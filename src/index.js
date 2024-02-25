@@ -8,7 +8,6 @@ const todoDescription = document.getElementById('add-description');
 const noAdded = document.querySelector('p.no-added');
 
 const searchInput = document.querySelector('#search-todos .inputs');
-const searchButton = document.querySelector('#search-todos .button');
 
 // ----------Checking the local storage-----------
 const loadStorageTodos = () => {
@@ -56,38 +55,42 @@ addButton.addEventListener('click', (e)=> {
 });
 
 // -------Search Button Handler-------------
-searchButton.addEventListener('click', (e)=>{
+searchInput.addEventListener('input', (e)=>{
     e.preventDefault();
-    if(searchInput.value !== ''){
-        const searchTodo = todos.filter((todo) => {
-            return todo.title.includes(searchInput.value.toLowerCase().trim());
-        });
-
-        list.innerHTML = '';
-        document.querySelector('.details').style.display = 'none';
-
-        if(searchTodo.length > 0 ){
-            createTodos(searchTodo, displayNone = true);
-        }else{
-            const notFound = document.createElement('p');
-            notFound.textContent = 'No Todos Match';
-            notFound.classList.add('no-todos');
-            list.appendChild(notFound);
-        }
-        
-        const closeSearch = document.createElement('button');
-        closeSearch.textContent = 'Close Search';
-        closeSearch.classList.add('button');
-        
-        tasks.appendChild(closeSearch);
-        
-        closeSearch.addEventListener('click', ()=>{
-            searchInput.value = '';
+    if(todos.length > 0){
+        if(e.target.value !== ''){
+            const searchTodo = todos.filter((todo) => {
+                return todo.title.includes(e.target.value.toLowerCase().trim());
+            });
+    
             list.innerHTML = '';
-            document.querySelector('.details').style.display = 'block';
-            createTodos(todos);
-            tasks.removeChild(closeSearch);
-        });
+            document.querySelector('.details').style.display = 'none';
+    
+            if(searchTodo.length > 0 ){
+                createTodos(searchTodo, displayNone = true);
+            }else{
+                const notFound = document.createElement('p');
+                notFound.textContent = 'No Todos Match';
+                notFound.classList.add('no-todos');
+                list.appendChild(notFound);
+            }
+            
+            const closeSearch = document.createElement('button');
+            closeSearch.textContent = 'Close Search';
+            closeSearch.classList.add('button');
+    
+            if(tasks.lastChild.textContent !== 'Close Search'){
+                tasks.appendChild(closeSearch);
+            }
+            
+            closeSearch.addEventListener('click', ()=>{
+                searchInput.value = '';
+                list.innerHTML = '';
+                document.querySelector('.details').style.display = 'block';
+                createTodos(todos);
+                tasks.removeChild(closeSearch);
+            });
+        }
     }
 });
 
