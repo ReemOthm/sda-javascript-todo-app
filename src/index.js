@@ -204,11 +204,7 @@ const editHandler = (todo)=>{
             if(e.id !== todo.id)
                 return e;
             else {
-                e.title = editTitle.value ;
-                e.description= editDescription.value;
-                e.completed= false;
-                e.date =`${editedDate.getDate()}/${editedDate.getMonth()+1} - ${editedDate.getHours()}:${editedDate.getMinutes()}`;
-                return e;
+                return {...e, title: editTitle.value, description: editDescription.value, date:`${editedDate.getDate()}/${editedDate.getMonth()+1} - ${editedDate.getHours()}:${editedDate.getMinutes()}`};
             }
         });
         console.log(todos);
