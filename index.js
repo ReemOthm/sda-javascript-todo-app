@@ -54,6 +54,10 @@ addButton.addEventListener('click', (e)=> {
     loadStorageTodos();
 });
 
+document.querySelector('#search-todos form').addEventListener('submit',(e)=>{
+    e.preventDefault();
+})
+
 // -------Search Button Handler-------------
 searchInput.addEventListener('input', (e)=>{
     e.preventDefault();
