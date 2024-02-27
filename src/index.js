@@ -35,7 +35,7 @@ addButton.addEventListener('click', (e)=> {
 
         todos.push(
             {
-                id: todos.length, 
+                id:Date.now(), 
                 title: todoTitle.value.trim(),
                 description: todoDescription.value.trim(),
                 completed: false,
@@ -125,7 +125,7 @@ function createTodos(todos, displayNone = false){
         edit.classList.add('edit');
 
         edit.addEventListener('click', ()=>{
-            editHandler(todo,index);
+            editHandler(todo);
         })
         
         const del =document.createElement('span');
@@ -190,7 +190,7 @@ const deleteTodo = (id)=> {
 }
 
 // --------Edit Todo----------------
-const editHandler = (todo, index)=>{
+const editHandler = (todo)=>{
     const editTodos = document.getElementById('edit-todos');
     editTodos.style.display = "grid";
     
@@ -205,12 +205,16 @@ const editHandler = (todo, index)=>{
     const editBtn = document.getElementById('edit-btn');
     editBtn.onclick = (e)=>{
         e.preventDefault();
-        todos.splice(index,1, {
-            id: todo.id,
-            title: editTitle.value, 
-            description: editDescription.value, 
-            completed: false,
-            date: `${editedDate.getDate()}/${editedDate.getMonth()+1} - ${editedDate.getHours()}:${editedDate.getMinutes()}`
+        todos = todos.map((e)=>{
+            if(e.id !== todo.id)
+                return e;
+            else {
+                e.title = editTitle.value ;
+                e.description= editDescription.value;
+                e.completed= false;
+                e.date =`${editedDate.getDate()}/${editedDate.getMonth()+1} - ${editedDate.getHours()}:${editedDate.getMinutes()}`;
+                return e;
+            }
         });
         console.log(todos);
         list.innerHTML = '';
