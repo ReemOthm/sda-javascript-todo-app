@@ -67,7 +67,7 @@ searchInput.addEventListener('input', (e)=>{
             document.querySelector('.details').style.display = 'none';
     
             if(searchTodo.length > 0 ){
-                createTodos(searchTodo, displayNone = true);
+                createTodos(searchTodo);
             }else{
                 const notFound = document.createElement('p');
                 notFound.textContent = 'No Todos Match';
@@ -96,7 +96,7 @@ searchInput.addEventListener('input', (e)=>{
 
 // Functions
 // -----------Render Todos-----------                                        
-function createTodos(todos, displayNone = false){
+function createTodos(todos){
     todos.forEach((todo,index)=>{
         //tha main div
         const task = document.createElement('div');
@@ -134,11 +134,6 @@ function createTodos(todos, displayNone = false){
         del.addEventListener('click', ()=>{
             deleteTodo(todo.id);
         });
-
-        if(displayNone == true){
-            edit.style.display = 'none';
-            del.style.display = 'none';
-        }
         
         icons.appendChild(edit);
         icons.appendChild(del);
