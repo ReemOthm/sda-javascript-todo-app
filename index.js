@@ -270,3 +270,18 @@ function completedTodos(){
 }
 
 window.addEventListener('DOMContentLoaded', loadStorageTodos);
+
+document.querySelector(".options .icon").onclick = function(){
+    this.parentElement.classList.toggle("open")
+}
+
+let colorList = document.querySelectorAll(".options > div div")
+
+colorList.forEach(el=>{
+    el.addEventListener("click", (e)=>{e.target.dataset.color
+        document.body.style.backgroundImage = e.target.dataset.color
+        document.querySelectorAll(".main--bg")[0].style.backgroundImage = e.target.dataset.color
+        document.querySelectorAll(".main--bg")[1].style.backgroundImage = e.target.dataset.color
+    })
+})
+
